@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import Head from "next/head";
+import Navbar from '../../components/navbar';
 
 export default function continent() {
     const router = useRouter();
@@ -7,9 +7,7 @@ export default function continent() {
 
     return (
         <>
-        <Head>
-            <title></title>
-        </Head>
+        <Navbar/>
         <h1>Hello {contName}</h1>
         </>
     )

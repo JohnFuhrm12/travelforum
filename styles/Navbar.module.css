@@ -2,21 +2,37 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-bottom: solid 2px black;
+    border-bottom: solid 2.5px black;
 }
 
 .navHomeSearchContainer {
     display: flex;
     flex-direction: row;
-    margin-left: 3%;
+    margin-left: 2%;
+    min-width: 25%;
+}
+
+.navTitle {
+    font-size: 25px;
+    cursor: pointer;
+    margin-right: 5%;
 }
 
 .navLinksContainer {
     display: flex;
     flex-direction: row;
-    margin-right: 3%;
+    min-width: 25%;
 }
 
 .navLink {
-    margin-inline: 2%;
+    margin-inline: 3%;
+    cursor: pointer;
+    transition: 0.5ms;
+    font-size: 22px;
+    border-bottom: solid 3px white;
+}
+
+.navLink:hover {
+    transition: 0.5ms;
+    border-bottom: solid 3px black;
 }
