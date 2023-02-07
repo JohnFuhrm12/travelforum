@@ -1,0 +1,22 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: solid 2px black;
+}
+
+.navHomeSearchContainer {
+    display: flex;
+    flex-direction: row;
+    margin-left: 3%;
+}
+
+.navLinksContainer {
+    display: flex;
+    flex-direction: row;
+    margin-right: 3%;
+}
+
+.navLink {
+    margin-inline: 2%;
+}
