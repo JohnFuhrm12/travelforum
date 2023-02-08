@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Head from 'next/head';
 import Link from 'next/link';
 import styles from '@/styles/Destinations.module.css';
 import Navbar from '../../components/navbar';
@@ -26,8 +27,25 @@ export default function continent() {
 
     // Countries Lists
     let countries:any = [];
-    const northAmerica = ['Canada', 'United States', 'Mexico'];
-    const southAmerica = ['Colombia', 'Venezuela', 'Ecuador', 'Peru', 'Bolivia', 'Brazil', 'Chile', 'Argentina', 'Paraguay', 'Uruguay'];
+
+    const northAmerica = [
+        {countryName: 'Canada', flag:'https://res.cloudinary.com/dvmw658s9/image/upload/v1675827370/TravelForum/Flags/aoqtpzleortlxjltyvvj.png'},
+        {countryName: 'USA', flag:'https://res.cloudinary.com/dvmw658s9/image/upload/v1675827633/TravelForum/Flags/ezzkrmyvrsugkc16hcxk.png'},
+        {countryName: 'Mexico', flag:'https://res.cloudinary.com/dvmw658s9/image/upload/v1675827369/TravelForum/Flags/x3vkn2pbimujpnh2prtm.png'}
+    ];
+
+    const southAmerica = [
+        {countryName: 'Colombia', flag: 'https://res.cloudinary.com/dvmw658s9/image/upload/v1675826526/TravelForum/Flags/jvmavgx7wepfu0870tgf.png'},
+        {countryName: 'Venezuela', flag: 'https://res.cloudinary.com/dvmw658s9/image/upload/v1675827214/TravelForum/Flags/r24w9p4pzvwq85la8tuq.png'},
+        {countryName: 'Ecuador', flag: 'https://res.cloudinary.com/dvmw658s9/image/upload/v1675826526/TravelForum/Flags/mgqqu2nptatg4rmy1c6w.png'},
+        {countryName: 'Peru', flag: 'https://res.cloudinary.com/dvmw658s9/image/upload/v1675826527/TravelForum/Flags/jbt59rjendc9xalwzixc.png'},
+        {countryName: 'Bolivia', flag: 'https://res.cloudinary.com/dvmw658s9/image/upload/v1675826526/TravelForum/Flags/l5qsdwjn1faqmxhx57yn.png'},
+        {countryName: 'Brazil', flag: 'https://res.cloudinary.com/dvmw658s9/image/upload/v1675826526/TravelForum/Flags/zjqxttlocdbjekd30q2s.png'},
+        {countryName: 'Chile', flag: 'https://res.cloudinary.com/dvmw658s9/image/upload/v1675826526/TravelForum/Flags/x1qf3rii2fn7b4qedtma.png'},
+        {countryName: 'Argentina', flag: 'https://res.cloudinary.com/dvmw658s9/image/upload/v1675826526/TravelForum/Flags/xdicxiezqpqrkvaqpzw1.png'},
+        {countryName: 'Paraguay', flag: 'https://res.cloudinary.com/dvmw658s9/image/upload/v1675826527/TravelForum/Flags/parmex07jhygm3gxqynw.png'},
+        {countryName: 'Uruguay', flag: 'https://res.cloudinary.com/dvmw658s9/image/upload/v1675826527/TravelForum/Flags/d7jf940t86kjau6ywnyi.png'}
+    ];
 
     switch (titleFromURL) {
         case 'North America':
@@ -40,6 +58,9 @@ export default function continent() {
 
     return ( // <Link href="/destinations/north-america"></Link>
         <>
+        <Head>
+            <title>World Nomad</title>
+        </Head>
         <Navbar/>
         <h1 className={styles.title}>Explore The {titleFromURL} Forums</h1>
         <div className={styles.linksList}>
@@ -50,12 +71,15 @@ export default function continent() {
             <Link className={styles.smallLink} href="#"><h2>{titleFromURL}</h2></Link>
         </div>
         <div className={styles.countriesContainer}>
-            <h2 className={styles.threadTitle}>Forum</h2>
-            {countries.map((country:string, index:number) => {
+            <h2 className={styles.threadTitle}>Country Forums</h2>
+            {countries.map((country:any, index:number) => {
                 return (
                     <>
                     <div className={styles.forumRow}>
-                        <h2 className={styles.threadTitle} key={index}>{country}</h2>
+                        <div className={styles.titleImgContainer}>
+                            <img className={styles.flagImg} src={country.flag}/>
+                            <h2 className={styles.threadTitle} key={index}>{country.countryName}</h2>
+                        </div>
                         <h2 className={styles.threadTitle}>Threads: 0</h2>
                     </div>
                     </>

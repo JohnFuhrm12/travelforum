@@ -6,6 +6,9 @@ import Navbar from '@/components/navbar';
 export default function Home() {
   return (
     <>
+    <Head>
+      <title>World Nomad</title>
+    </Head>
       <Navbar/>
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>World Nomad Travel Forums</h1>

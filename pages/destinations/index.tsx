@@ -6,6 +6,9 @@ import Navbar from '@/components/navbar';
 export default function continentsList() {
     return (
         <>
+        <Head>
+            <title>World Nomad</title>
+        </Head>
         <Navbar/>
         <div className={styles.sectionContainer}>
         <h2 className={styles.sectionTitle}>Browse by Destination</h2>
