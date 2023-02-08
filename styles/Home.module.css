@@ -34,10 +34,24 @@
     border: solid 3px black;
     cursor: pointer;
     transition: 0.5s;
+    margin-bottom: 10px;
 }
 
 .destinationImg:hover {
     transition: 0.5s;
     transform: translateY(-5px);
     opacity: 0.6;
+}
+
+.destinationTitle {
+    border-bottom: solid 3px white;
+    transition: 500ms;
+    max-width: 200px;
+    margin: 0 auto;
+    padding-bottom: 5px;
+}
+
+.destinationTitle:hover {
+    border-bottom: solid 3px black;
+    transition: 500ms;
 }

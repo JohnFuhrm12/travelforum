@@ -10,29 +10,33 @@
     flex-direction: row;
     margin-left: 2%;
     min-width: 25%;
+    justify-content: space-around;
 }
 
 .navTitle {
     font-size: 25px;
     cursor: pointer;
     margin-right: 5%;
+    white-space: nowrap;
 }
 
 .navLinksContainer {
     display: flex;
     flex-direction: row;
     min-width: 25%;
+    justify-content: space-around;
 }
 
 .navLink {
     margin-inline: 3%;
     cursor: pointer;
-    transition: 0.5ms;
+    transition: 500ms;
     font-size: 22px;
     border-bottom: solid 3px white;
+    padding-bottom: 5px;
 }
 
 .navLink:hover {
-    transition: 0.5ms;
+    transition: 500ms;
     border-bottom: solid 3px black;
 }

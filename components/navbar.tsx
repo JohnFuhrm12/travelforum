@@ -6,11 +6,11 @@ export default function Navbar() {
     <>
     <div className={navStyles.navbar}>
         <div className={navStyles.navHomeSearchContainer}>
-        <Link href="/"><h1 className={navStyles.navTitle}>World Nomad</h1></Link>
+        <Link className='link' href="/"><h1 className={navStyles.navTitle}>World Nomad</h1></Link>
           <h2 className={navStyles.navLink}>Search</h2>
         </div>
         <div className={navStyles.navLinksContainer}>
-          <h2 className={navStyles.navLink}>Destinations</h2>
+        <Link className='link' href="/destinations"><h2 className={navStyles.navLink}>Destinations</h2></Link>
           <h2 className={navStyles.navLink}>Sign Up</h2>
           <h2 className={navStyles.navLink}>Login</h2>
         </div>
