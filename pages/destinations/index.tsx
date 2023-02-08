@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import styles from '@/styles/Home.module.css';
 import Navbar from '@/components/navbar';
+import Footer from '@/components/footer';
 
 export default function continentsList() {
     return (
@@ -41,6 +42,7 @@ export default function continentsList() {
             </div>
         </div>
       </div>
+      <Footer/>
       </>
     )
 }
