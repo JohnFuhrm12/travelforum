@@ -79,13 +79,6 @@ export default function country() {
         setThreads(currentQuerySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
       };
 
-      console.log(threads);
-
-      console.log(threads.map((thread:any, index:number) => {
-        return thread.title;
-      }));
-
-
     return ( // <Link href="/destinations/north-america"></Link>
         <>
         <Head>
@@ -105,7 +98,13 @@ export default function country() {
         <div className={styles.countriesContainer}>
             <h2 className={styles.threadTitle}>{upperCountryName}</h2>
             {threads.map((thread:any, index:number) => {
-                return <h2 key={index} className={styles.threadTitle}>{thread.title}</h2>
+                return (
+                <>
+                <div className={styles.forumRow}>
+                     <h2 key={index} className={styles.threadTitle}>{thread.title}</h2>
+                </div>
+                </>
+                )
             })}
         </div>
         <Footer/>
