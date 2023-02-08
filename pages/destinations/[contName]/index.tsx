@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '@/styles/Destinations.module.css';
-import Navbar from '../../components/navbar';
+import Navbar from '../../../components/navbar';
 import Footer from "@/components/footer";
 
 export default function continent() {
@@ -26,7 +26,7 @@ export default function continent() {
 
     titleFromURL = titleArr.join(' ');
 
-    // Countries Lists
+    // Countries and Flags Lists
     let countries:any = [];
 
     const northAmerica = [
@@ -74,12 +74,14 @@ export default function continent() {
         <div className={styles.countriesContainer}>
             <h2 className={styles.threadTitle}>Country Forums</h2>
             {countries.map((country:any, index:number) => {
+                const sluggedCountryName = (country.countryName).toLowerCase();
+
                 return (
                     <>
                     <div className={styles.forumRow}>
                         <div className={styles.titleImgContainer}>
                             <img className={styles.flagImg} src={country.flag}/>
-                            <h2 className={styles.threadTitle} key={index}>{country.countryName}</h2>
+                            <Link className="link" href={`${contName}/${sluggedCountryName}`}><h2 className={styles.threadTitle} key={index}>{country.countryName}</h2></Link>
                         </div>
                         <h2 className={styles.threadTitle}>Threads: 0</h2>
                     </div>
