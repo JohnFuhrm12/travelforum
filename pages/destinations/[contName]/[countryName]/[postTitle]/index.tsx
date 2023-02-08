@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '@/styles/Destinations.module.css';
-import Navbar from '../../../../components/navbar';
+import Navbar from '../../../../../components/navbar';
 import Footer from "@/components/footer";
 
 import { useEffect, useState } from "react";
@@ -12,7 +12,7 @@ import { collection, doc, setDoc, deleteDoc, getDocs, query, where, limit } from
 export default function country() {
     const router = useRouter();
     const {countryName} = router.query;
-    const {contName} = router.query;
+    const {postTitle} = router.query;
 
     // State
     const [threads, setThreads]:any = useState([]);
@@ -75,9 +75,11 @@ export default function country() {
     const threadsRef = collection(db, "threads");
 
     const getDbmessages = async () => {
-        const itemsRef = query(threadsRef, where('country', '==', upperCountryName));
-        const currentQuerySnapshot = await getDocs(itemsRef);
-        setThreads(currentQuerySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+        if (postTitle) {
+            const itemsRef = query(threadsRef, where('title', '==', postTitle));
+            const currentQuerySnapshot = await getDocs(itemsRef);
+            setThreads(currentQuerySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+        };
       };
 
     return ( // <Link href="/destinations/north-america"></Link>
@@ -86,7 +88,6 @@ export default function country() {
             <title>World Nomad</title>
         </Head>
         <Navbar/>
-        <h1 className={styles.title}>Explore The {upperCountryName} Forums</h1>
         <div className={styles.linksList}>
             <Link className={styles.smallLink} href="/"><h2>Home</h2></Link>
             <h2 className={styles.linkMarker}>{'>'}</h2>
@@ -94,25 +95,9 @@ export default function country() {
             <h2 className={styles.linkMarker}>{'>'}</h2>
             <Link className={styles.smallLink} href={`/destinations/${continentNameURL}`}><h2>{continentTitleFromURL}</h2></Link>
             <h2 className={styles.linkMarker}>{'>'}</h2>
-            <Link className={styles.smallLink} href="#"><h2>{upperCountryName}</h2></Link>
+            <Link className={styles.smallLink} href={`/destinations/${continentNameURL}/${countryName}`}><h2>{upperCountryName}</h2></Link>
         </div>
-        <div className={styles.countriesContainer}>
-            <h2 className={styles.threadTitle}>{upperCountryName}</h2>
-            {threads.map((thread:any, index:number) => {
-                const sluggedTitle = (thread.title).toString().toLowerCase();
-
-                return (
-                <>
-                <div className={styles.forumRow}>
-                    <div className={styles.forumLeftColumn}>
-                    <Link className="link" href={`/destinations/${contName}/${countryName}/${sluggedTitle}`}><h2 key={index} className={styles.threadTitle}>{thread.title}</h2></Link>
-                        <h2 className={styles.forumSubtitle}>{thread.user}</h2>
-                     </div>
-                </div>
-                </>
-                )
-            })}
-        </div>
+        <h1 className={styles.title}>Explore The {upperCountryName} Forums</h1>
         <Footer/>
         </>
     )
