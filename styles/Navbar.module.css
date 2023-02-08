@@ -2,7 +2,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-bottom: solid 2.5px black;
+    border-bottom: solid 2.5px white;
+    background-color: rgb(4, 123, 182);
+    color: white;
 }
 
 .navHomeSearchContainer {
@@ -32,11 +34,16 @@
     cursor: pointer;
     transition: 500ms;
     font-size: 22px;
-    border-bottom: solid 3px white;
+    border-bottom: solid 3px rgb(4, 123, 182);
     padding-bottom: 5px;
 }
 
 .navLink:hover {
     transition: 500ms;
-    border-bottom: solid 3px black;
+    border-bottom: solid 3px white;
+}
+
+.navLinkTrue {
+    color: white;
+    text-decoration: none;
 }
