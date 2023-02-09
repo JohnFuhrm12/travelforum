@@ -2,7 +2,8 @@ import { useRouter } from "next/router";
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '@/styles/Destinations.module.css';
-import Navbar from '../../../../../components/navbar';
+import threadStyles from '@/styles/Thread.module.css';
+import Navbar from '@/components/navbar';
 import Footer from "@/components/footer";
 
 import { useEffect, useState } from "react";
@@ -15,26 +16,29 @@ export default function country() {
     const {postTitle} = router.query;
 
     // State
-    const [threads, setThreads]:any = useState([]);
-    const threadsCount = threads.length;
+    const [thread, setThread]:any = useState([]);
+    const [comments, setComments]:any = useState([]);
 
     const [continentNameURL, setContinentNameURL]:any = useState('');
     const [continentTitleFromURL, setContinentTitleFromURL]:any = useState('');
 
     useEffect(() => {
         getDbmessages();
+        getComments();
         getContinentName();
     }, []);
 
     // Check For Invalid Continent Name
-    let attempts = 0;
+    const [attempted, setAttempted] = useState(false);
 
     useEffect(() => {
         if (continentNameURL === '[contName]') {
             getContinentName();
         };
-        if (threadsCount === 0 && attempts < 1) {
+        if (thread.length === 0 && !attempted) {
             getDbmessages();
+            getComments();
+            setAttempted(true);
         };
     });
 
@@ -42,6 +46,11 @@ export default function country() {
     let countryChars:any;
     countryChars = countryName?.toString();
     const upperCountryName = countryChars?.charAt(0).toUpperCase() + countryChars?.slice(1);
+
+    // Capitalize Post Name
+    let postName:any;
+    postName = postTitle?.toString();
+    const upperPostName = postName?.charAt(0).toUpperCase() + postName?.slice(1);
 
     // Get Continent Name From URL
     const { asPath } = useRouter();
@@ -71,18 +80,29 @@ export default function country() {
         setContinentTitleFromURL(titleArr.join(' '));
     };
 
-    // Get Country Threads
+    // Get Country Thread
     const threadsRef = collection(db, "threads");
 
     const getDbmessages = async () => {
         if (postTitle) {
-            const itemsRef = query(threadsRef, where('title', '==', postTitle));
+            const itemsRef = query(threadsRef, where('title', '==', upperPostName));
             const currentQuerySnapshot = await getDocs(itemsRef);
-            setThreads(currentQuerySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+            setThread(currentQuerySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
         };
       };
 
-    return ( // <Link href="/destinations/north-america"></Link>
+    // Get Thread Comments
+    const commentsRef = collection(db, "comments");
+
+    const getComments = async () => {
+        if (postTitle) {
+            const itemsRef = query(commentsRef, where('thread', '==', upperPostName));
+            const currentQuerySnapshot = await getDocs(itemsRef);
+            setComments(currentQuerySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+        };
+      };
+
+    return ( 
         <>
         <Head>
             <title>World Nomad</title>
@@ -97,7 +117,35 @@ export default function country() {
             <h2 className={styles.linkMarker}>{'>'}</h2>
             <Link className={styles.smallLink} href={`/destinations/${continentNameURL}/${countryName}`}><h2>{upperCountryName}</h2></Link>
         </div>
-        <h1 className={styles.title}>Explore The {upperCountryName} Forums</h1>
+        <h1 className={styles.title}>{upperPostName}</h1>
+        {thread.map((post:any, index:number) => {
+            return (
+                <>
+                <div className={threadStyles.postContainer}>
+                    <div className={threadStyles.userImgContainer}>
+                        <h2 className={threadStyles.username}>{post.user}</h2>
+                    </div>
+                    <div className={threadStyles.postBodyContainer}>
+                        <h2 className={threadStyles.postBody} key={index}>{post.body}</h2>
+                    </div>
+                </div>
+                </>
+            )
+        })}
+        {comments.map((comment:any, index:number) => {
+            return (
+                <>
+                    <div className={threadStyles.postContainer}>
+                    <div className={threadStyles.userImgContainer}>
+                        <h2 className={threadStyles.username}>{comment.user}</h2>
+                    </div>
+                    <div className={threadStyles.postBodyContainer}>
+                        <h2 className={threadStyles.postBody} key={index}>{comment.body}</h2>
+                    </div>
+                </div>
+                </>
+            )
+        })}
         <Footer/>
         </>
     )

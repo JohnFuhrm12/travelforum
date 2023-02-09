@@ -1,10 +1,33 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '@/styles/Home.module.css';
+import destinationStyles from '@/styles/Destinations.module.css';
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
 
+import { useEffect, useState } from "react";
+import { db } from "@/firebase";
+import { collection, doc, setDoc, deleteDoc, getDocs, query, where, limit } from "firebase/firestore";
+
 export default function Home() {
+
+  // State
+  const [threads, setThreads]:any = useState([]);
+  const threadsCount = threads.length;
+
+  useEffect(() => {
+    getDbmessages();
+  }, []);
+
+  // Get All Threads
+  const threadsRef = collection(db, "threads");
+
+  const getDbmessages = async () => {
+      const itemsRef = query(threadsRef);
+      const currentQuerySnapshot = await getDocs(itemsRef);
+      setThreads(currentQuerySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+    };
+
   return (
     <>
     <Head>
@@ -48,6 +71,23 @@ export default function Home() {
       </div>
       <div className={styles.sectionContainer}>
         <h2 className={styles.sectionTitle}>New Threads</h2>
+      </div>
+      <div className={destinationStyles.countriesContainer}>
+      {threads.map((thread:any, index:number) => {
+                const sluggedTitle = (thread.title).toString().toLowerCase();
+                const countryLowercase = thread.country.toLowerCase();
+
+                return (
+                <>
+                <div className={destinationStyles.forumRow}>
+                    <div className={destinationStyles.forumLeftColumn}>
+                    <Link className="link" href={`/destinations/${thread.continent}/${countryLowercase}/${sluggedTitle}`}><h2 key={index} className={destinationStyles.threadTitle}>{thread.title}</h2></Link>
+                        <h2 className={destinationStyles.forumSubtitle}>{thread.user}</h2>
+                     </div>
+                </div>
+                </>
+                )
+            })}
       </div>
       <Footer/>
     </>

@@ -27,14 +27,15 @@ export default function country() {
     }, []);
 
     // Check For Invalid Continent Name
-    let attempts = 0;
+    const [attempted, setAttempted] = useState(false);
 
     useEffect(() => {
         if (continentNameURL === '[contName]') {
             getContinentName();
         };
-        if (threadsCount === 0 && attempts < 1) {
+        if (threadsCount === 0 && !attempted) {
             getDbmessages();
+            setAttempted(true);
         };
     });
 
