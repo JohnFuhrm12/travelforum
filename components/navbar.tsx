@@ -11,8 +11,8 @@ export default function Navbar() {
         </div>
         <div className={navStyles.navLinksContainer}>
         <Link className={navStyles.navLinkTrue} href="/destinations"><h2 className={navStyles.navLink}>Destinations</h2></Link>
-          <h2 className={navStyles.navLink}>Sign Up</h2>
           <h2 className={navStyles.navLink}>Login</h2>
+          <Link className={navStyles.navLinkTrue} href="/register"><h2 className={navStyles.navLink}>Sign Up</h2></Link>
         </div>
     </div>
     </>
