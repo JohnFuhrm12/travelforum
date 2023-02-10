@@ -8,8 +8,7 @@ import { db } from '@/firebase';
 import { collection, doc, setDoc, deleteDoc, getDocs, query, where, limit } from "firebase/firestore";
 import { useState } from 'react';
 
-export default function Register() {
-
+export default function Register( {...props} ) {
     const [errorMessage, setErrorMessage] = useState(false);
 
     const [currentUsername, setCurrentUsername] = useState('');
@@ -35,7 +34,8 @@ export default function Register() {
     const login = async (e:any) => {
         getCredentials();
         if (currentUsername === realUsername && currentPassword === realPassword) {
-            console.log('success');
+            props.setLoggedIn(true);
+            props.setCurrentUser(realUsername);
           }
           else {
             setErrorMessage(true);
