@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { db } from "@/firebase";
 import { collection, doc, setDoc, deleteDoc, getDocs, query, where, limit } from "firebase/firestore";
 
-export default function Home() {
+export default function Home( {...props} ) {
 
   // State
   const [threads, setThreads]:any = useState([]);
@@ -17,6 +17,7 @@ export default function Home() {
 
   useEffect(() => {
     getDbmessages();
+    console.log(props.currentUser);
   }, []);
 
   // Get All Threads

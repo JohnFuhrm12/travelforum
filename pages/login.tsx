@@ -36,6 +36,8 @@ export default function Register( {...props} ) {
         if (currentUsername === realUsername && currentPassword === realPassword) {
             props.setLoggedIn(true);
             props.setCurrentUser(realUsername);
+            e.preventDefault();
+            console.log(currentUsername);
           }
           else {
             setErrorMessage(true);
