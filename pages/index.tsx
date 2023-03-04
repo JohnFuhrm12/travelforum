@@ -18,6 +18,7 @@ export default function Home( {...props} ) {
   useEffect(() => {
     getDbmessages();
     console.log(props.currentUser);
+    console.log(props.loggedIn);
   }, []);
 
   // Get All Threads
@@ -29,12 +30,18 @@ export default function Home( {...props} ) {
       setThreads(currentQuerySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
     };
 
+  const loggedIn = props.loggedIn;
+
+  const navProps = {
+    loggedIn
+  };
+
   return (
     <>
     <Head>
       <title>World Nomad</title>
     </Head>
-      <Navbar/>
+      <Navbar {...navProps} />
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>World Nomad Travel Forums</h1>
         <h1 className={styles.subTitle}>Welcome to The Forums!</h1>
