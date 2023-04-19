@@ -38,6 +38,7 @@ export default function Register( {...props} ) {
             props.setCurrentUser(realUsername);
             e.preventDefault();
             console.log(currentUsername);
+            console.log(`PROP: ${props.currentUser}`);
           }
           else {
             setErrorMessage(true);

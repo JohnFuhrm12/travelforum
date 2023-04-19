@@ -31,9 +31,11 @@ export default function Home( {...props} ) {
     };
 
   const loggedIn = props.loggedIn;
+  const currentUser = props.currentUser;
 
   const navProps = {
-    loggedIn
+    loggedIn,
+    currentUser
   };
 
   return (

@@ -9,17 +9,26 @@ import { useEffect, useState } from "react";
 import { db } from "@/firebase";
 import { collection, doc, setDoc, deleteDoc, getDocs, query, where, limit } from "firebase/firestore";
 
-export default function country() {
+export default function profile( {...props} ) {
     const router = useRouter();
     const {username} = router.query;
+    ///const {username} = router.query;
+
+    const loggedIn = props.loggedIn;
+    const currentUser = props.currentUser;
+
+    const navProps = {
+        loggedIn,
+        currentUser
+    };
 
     return ( // <Link href="/destinations/north-america"></Link>
         <>
         <Head>
             <title>World Nomad</title>
         </Head>
-        <Navbar/>
-        <h1 className={styles.title}>{username} Profile</h1>
+        <Navbar {...navProps}/>
+        <h1 className={styles.title}>{username}'s Profile</h1>
         <Footer/>
         </>
     )

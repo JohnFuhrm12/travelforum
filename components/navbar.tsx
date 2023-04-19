@@ -2,7 +2,8 @@ import navStyles from '../styles/Navbar.module.css';
 import Link from 'next/link';
 
 export default function Navbar( {...navProps} ) {
-  console.log(navProps.loggedIn);
+  console.log(navProps.currentUser);
+  
 
     return (
     <>
@@ -15,7 +16,7 @@ export default function Navbar( {...navProps} ) {
           <Link className={navStyles.navLinkTrue} href="/destinations"><h2 className={navStyles.navLink}>Destinations</h2></Link>
           {navProps.loggedIn ?
           <>
-          <Link className={navStyles.navLinkTrue} href="/login"><h2 className={navStyles.navLink}>Profile</h2></Link>
+          <Link className={navStyles.navLinkTrue} href={`/${navProps.currentUser}`}><h2 className={navStyles.navLink}>Profile</h2></Link>
           </>
           : 
           <>
