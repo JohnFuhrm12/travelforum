@@ -24,6 +24,9 @@ export default function profile( {...props} ) {
 
     const defaultPic = 'https://res.cloudinary.com/dvmw658s9/image/upload/v1681944855/TravelForum/y12kc5h3bdlvedhmvpom.jpg';
 
+    const aboutMeContent = 'Nothing added yet...'
+    const countriesTreavledContent = 'No countries traveled yet...'
+
     return ( // <Link href="/destinations/north-america"></Link>
         <>
         <Head>
@@ -33,6 +36,16 @@ export default function profile( {...props} ) {
         <div className={styles.titleRow}>
             <img className={styles.profilePicture} src={defaultPic}/>
             <h1 className={styles.title}>{username}'s Profile</h1>
+        </div>
+        <div className={styles.infoColumn}>
+            <div className={styles.info}>
+                <h2 className={styles.infoTitle}>About Me</h2>
+                <p className={styles.infoContent}>{aboutMeContent}</p>
+            </div>
+            <div className={styles.info}>
+                <h2 className={styles.infoTitle}>Countries Traveled</h2>
+                <p className={styles.infoContent}>{countriesTreavledContent}</p>
+            </div>
         </div>
         <Footer/>
         </>
