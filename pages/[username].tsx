@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import Head from 'next/head';
 import Link from 'next/link';
-import styles from '@/styles/Destinations.module.css';
+import styles from '@/styles/Profile.module.css';
 import Navbar from '@/components/navbar';
 import Footer from "@/components/footer";
 
@@ -22,13 +22,18 @@ export default function profile( {...props} ) {
         currentUser
     };
 
+    const defaultPic = 'https://res.cloudinary.com/dvmw658s9/image/upload/v1681944855/TravelForum/y12kc5h3bdlvedhmvpom.jpg';
+
     return ( // <Link href="/destinations/north-america"></Link>
         <>
         <Head>
             <title>World Nomad</title>
         </Head>
         <Navbar {...navProps}/>
-        <h1 className={styles.title}>{username}'s Profile</h1>
+        <div className={styles.titleRow}>
+            <img className={styles.profilePicture} src={defaultPic}/>
+            <h1 className={styles.title}>{username}'s Profile</h1>
+        </div>
         <Footer/>
         </>
     )
